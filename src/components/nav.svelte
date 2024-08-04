@@ -1,24 +1,30 @@
 <script>
 	import { base } from '$app/paths';
+	import { links } from '../lib/links';
 
 	let isOpen = false;
 	export let currentPage = '';
+	let isAnimating = false;
 
 	function toggleMenu() {
-		isOpen = !isOpen;
+		if (isOpen) {
+			isAnimating = true;
+			setTimeout(() => {
+				isOpen = false;
+				isAnimating = false;
+			}, 300); // Match the animation duration
+		} else {
+			isOpen = true;
+		}
 	}
 
 	function closeMenu() {
-		isOpen = false;
+		isAnimating = true;
+		setTimeout(() => {
+			isOpen = false;
+			isAnimating = false;
+		}, 300); // Match the animation duration
 	}
-
-	const links = [
-		{ href: `${base}/monitoramento`, text: 'Monitoramento' },
-		{ href: `${base}/automacao`, text: 'Automação' },
-		{ href: `${base}/servicos`, text: 'Assistência' },
-		{ href: `${base}/sobre`, text: 'Sobre nós' },
-		{ href: `${base}/contato`, text: 'Contato' }
-	];
 </script>
 
 <header class="flex justify-between p-6 bg-white shadow-md relative">
@@ -64,7 +70,10 @@
 			</ul>
 		</nav>
 		<button
-			class="bg-red-700 hover:bg-red-800 text-white py-2 px-4 rounded transition hidden md:block"
+			class="bg-red-700 hover:bg-red-800 text-white py-2 px-4 rounded transition hidden md:block {currentPage ===
+			links[links.length - 1].text
+				? 'active underline'
+				: ''}"
 		>
 			<a href={links[links.length - 1].href}>{links[links.length - 1].text}</a>
 		</button>
@@ -73,14 +82,22 @@
 	<!-- Full-Screen Menu Overlay -->
 	{#if isOpen}
 		<div
-			class="fixed inset-0 bg-red-950 bg-opacity-90 flex flex-col items-center justify-center z-50"
+			class="fixed inset-0 bg-red-950 bg-opacity-90 flex flex-col items-center justify-center z-50 {isAnimating
+				? 'animate-slide-out-left'
+				: 'animate-slide-in-left'}"
 		>
-			<button class="absolute top-4 right-4 text-white text-3xl" on:click={closeMenu}>
+			<button class="absolute top-4 right-4 text-white text-5xl mr-4" on:click={closeMenu}>
 				&times;
 			</button>
-			<ul class="space-y-6">
+			<ul class="space-y-6 -mt-12">
 				{#each links as { href, text }}
-					<li><a {href} class="text-white text-3xl" on:click={closeMenu}>{text}</a></li>
+					<li>
+						<a
+							{href}
+							class="text-white text-3xl {currentPage === text ? 'active underline' : ''}"
+							on:click={closeMenu}>{text}</a
+						>
+					</li>
 				{/each}
 			</ul>
 		</div>
@@ -88,8 +105,39 @@
 </header>
 
 <style lang="postcss">
+	@keyframes slide-in-left {
+		from {
+			transform: translateX(-100%);
+		}
+		to {
+			transform: translateX(0);
+		}
+	}
+
+	@keyframes slide-out-left {
+		from {
+			transform: translateX(0);
+		}
+		to {
+			transform: translateX(-100%);
+		}
+	}
+
+	.animate-slide-in-left {
+		animation: slide-in-left 0.3s ease-out;
+	}
+
+	.animate-slide-out-left {
+		animation: slide-out-left 0.3s ease-out;
+	}
+
+	.fixed {
+		@apply bg-red-950 bg-opacity-90 flex flex-col items-center justify-center z-50;
+		inset: 0;
+	}
+
 	.hover-effect {
-		@apply relative inline-block no-underline; /* Tailwind utilities for relative positioning and removing underline */
+		@apply relative inline-block no-underline;
 		color: inherit;
 	}
 
@@ -109,7 +157,7 @@
 	.hover-effect.active::after {
 		transform: scaleX(1);
 		transform-origin: bottom left;
-		transition: none; /* Remove transition for active state */
+		transition: none;
 	}
 
 	.hover-effect:hover::after {

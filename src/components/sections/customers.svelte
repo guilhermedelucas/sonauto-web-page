@@ -14,8 +14,8 @@
 	useReveal();
 </script>
 
-<section class="container mx-auto my-12 px-4">
-	<h2 class="text-3xl font-bold text-center mb-6 reveal">Clientes Satisfeitos</h2>
+<section class="container mx-auto my-4 md:my-12 px-4">
+	<h2 class="text-3xl font-bold text-center md:mb-6 reveal">Clientes Satisfeitos</h2>
 	<div class="flex flex-wrap items-center justify-center gap-4">
 		{#each customerLogos as logo}
 			<div class="flex items-center justify-center p-2 reveal">

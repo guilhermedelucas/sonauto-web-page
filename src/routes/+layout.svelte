@@ -1,10 +1,10 @@
 <script>
 	import '../app.css';
-	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { base } from '$app/paths';
 	import Nav from '../components/nav.svelte';
 	import Footer from '../components/footer.svelte';
+	import { links } from '../lib/links.js';
 
 	let currentPage = 'home';
 
@@ -19,6 +19,13 @@
 			currentPage = 'services';
 		} else if (path.startsWith(`${base}/contato`)) {
 			currentPage = 'contato';
+		}
+
+		for (const link of links) {
+			if (path.startsWith(link.href)) {
+				currentPage = link.text;
+				break;
+			}
 		}
 	}
 </script>
@@ -45,9 +52,7 @@
 		link={bannerLink}
 	/> -->
 
-	<main class="flex-grow">
-		<slot />
-	</main>
+	<slot />
 
 	<Footer />
 </div>

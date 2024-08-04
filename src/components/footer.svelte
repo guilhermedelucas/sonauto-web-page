@@ -2,7 +2,7 @@
 	import { base } from '$app/paths';
 </script>
 
-<footer class="bg-red-700 text-white mt-16 p-4">
+<footer class="bg-red-700 text-white p-4">
 	<div class="container mx-auto text-center">
 		<p class="mb-4">&copy; 2024 Sonauto Segurança Eletrônica</p>
 		<ul class="flex flex-wrap items-center justify-center space-x-4">
