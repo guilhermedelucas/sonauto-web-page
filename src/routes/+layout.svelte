@@ -5,43 +5,20 @@
 	import { base } from '$app/paths';
 	import Nav from '../components/nav.svelte';
 	import Footer from '../components/footer.svelte';
-	import Banner from '../components/banner.svelte';
 
 	let currentPage = 'home';
-	let bannerTitle = 'Welcome to Law Consulting';
-	let bannerDescription = null;
-	let bannerImgSrc = `${base}/business.jpg`;
-	let bannerLink = null;
-	let bannerLinkText = null;
 
 	$: {
 		const path = $page.url.pathname;
 
 		if (path === `${base}/`) {
 			currentPage = 'home';
-			bannerTitle = 'Welcome to Law Consulting';
-			bannerImgSrc = `${base}/business.jpg`;
-			bannerDescription = 'Law Consulting is a law firm that offers legal services to its clients.';
-			bannerLink = `${base}/about`;
-			bannerLinkText = 'Saiba mais...';
 		} else if (path.startsWith(`${base}/about`)) {
 			currentPage = 'about';
-			bannerTitle = 'About Us';
-			bannerImgSrc = `${base}/business.jpg`;
-			bannerLink = null;
-			bannerDescription = null;
 		} else if (path.startsWith(`${base}/services`)) {
 			currentPage = 'services';
-			bannerTitle = 'Our Services';
-			bannerImgSrc = `${base}/business.jpg`;
-			bannerLink = null;
-			bannerDescription = null;
-		} else if (path.startsWith(`${base}/contact`)) {
-			currentPage = 'contact';
-			bannerTitle = 'Contact Us';
-			bannerImgSrc = `${base}/business.jpg`;
-			bannerLink = null;
-			bannerDescription = null;
+		} else if (path.startsWith(`${base}/contato`)) {
+			currentPage = 'contato';
 		}
 	}
 </script>
@@ -58,7 +35,7 @@
 	/>
 </svelte:head>
 
-<div class="flex flex-col min-h-screen font-roboto text-gray-800">
+<div class="flex flex-col min-h-screen font-roboto text-gray-700">
 	<Nav {currentPage} />
 	<!-- <Banner
 		description={bannerDescription}
@@ -68,7 +45,7 @@
 		link={bannerLink}
 	/> -->
 
-	<main class="flex-grow py-6 sm:py-8 md:py-12 lg:py-16">
+	<main class="flex-grow">
 		<slot />
 	</main>
 
