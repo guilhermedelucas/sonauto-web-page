@@ -24,7 +24,7 @@
 </script>
 
 <svelte:head>
-	<title>Law Consulting Services - Regulatory Compliance, Legal Consultation</title>
+	<title>Sonauto - Segurança Eletrônica</title>
 	<meta
 		name="description"
 		content="Moai Expert law consulting services including regulatory compliance, legal consultation, contract review, risk management, and litigation support."

@@ -1,5 +1,5 @@
-<section class="container mx-auto mt-8 flex flex-col md:flex-row">
-	<div class="flex flex-col w-full md:w-1/2 md:pr-8 md:border-r gap-2">
+<section class="container mx-auto mt-8 flex flex-col-reverse md:flex-row">
+	<div class="flex flex-col w-full md:w-1/2 md:pr-8 md:border-r gap-2 pt-4 md:pt-0">
 		<div>
 			<div class="font-bold">Telefone:</div>
 			<a href="tel:1421052255" class="text-red-600 hover:text-red-800">(14) 2105-2255</a>
@@ -30,7 +30,7 @@
 			></iframe>
 		</div>
 	</div>
-	<div class="w-full md:w-1/2 md:ml-8">
+	<div class="w-full md:w-1/2 md:ml-8 border-b md:border-b-0 pb-4 md:pb-0">
 		<h1 class="text-3xl font-bold">Fale conosco</h1>
 		<p class="mt-4">
 			Solicite um orçamento ou assistência técnica. Entraremos em contato o mais rápido possível.

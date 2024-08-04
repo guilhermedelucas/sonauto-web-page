@@ -11,16 +11,28 @@
 	function closeMenu() {
 		isOpen = false;
 	}
+
+	const links = [
+		{ href: `${base}/monitoramento`, text: 'Monitoramento' },
+		{ href: `${base}/automacao`, text: 'Automação' },
+		{ href: `${base}/servicos`, text: 'Assistência' },
+		{ href: `${base}/sobre`, text: 'Sobre nós' },
+		{ href: `${base}/contato`, text: 'Contato' }
+	];
 </script>
 
 <header class="flex justify-between p-6 bg-white shadow-md relative">
 	<div class="md:container md:mx-auto w-full flex justify-between items-center">
 		<a href="{base}/" class="flex items-center">
-			<img class="max-w-[200px]" src="{base}/sonauto-logo.png" />
+			<img
+				class="max-w-[200px]"
+				alt="Sonauto Segurança Eletrônica logomarca"
+				src="{base}/sonauto-logo.png"
+			/>
 		</a>
 
 		<!-- Burger Icon for Small Devices -->
-		<button class="lg:hidden p-2 text-red-700" on:click={toggleMenu}>
+		<button class="md:hidden p-2 text-red-700" on:click={toggleMenu}>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				class="h-8 w-8"
@@ -38,49 +50,23 @@
 		</button>
 
 		<!-- Navigation Menu -->
-		<nav class="hidden lg:flex">
+		<nav class="hidden md:flex">
 			<ul class="flex space-x-6">
-				<li>
-					<a
-						href="{base}/"
-						class="hover:text-red-600 hover-effect {currentPage === 'home' ? 'active' : ''}">Home</a
-					>
-				</li>
-				<li>
-					<a
-						href="{base}/sobre"
-						class="hover:text-gray-600 hover-effect {currentPage === 'sobre' ? 'active' : ''}"
-						>Sobre nós</a
-					>
-				</li>
-				<li>
-					<a
-						href="{base}/clients"
-						class="hover:text-gray-600 hover-effect {currentPage === 'clientes' ? 'active' : ''}"
-						>Clientes</a
-					>
-				</li>
-				<li>
-					<a
-						href="{base}/contato"
-						class="hover:text-gray-600 hover-effect {currentPage === 'contato' ? 'active' : ''}"
-						>Contato</a
-					>
-				</li>
-				<li>
-					<a
-						href="{base}/seguranca"
-						class="hover:text-gray-600 hover-effect {currentPage === 'seguranca' ? 'active' : ''}"
-						>Segurança</a
-					>
-				</li>
+				{#each links.slice(0, -1) as { href, text }}
+					<li>
+						<a
+							{href}
+							class="hover:text-gray-600 hover-effect {currentPage === text ? 'active' : ''}"
+							>{text}</a
+						>
+					</li>
+				{/each}
 			</ul>
 		</nav>
-		<!-- Call to Action Button -->
 		<button
-			class="hidden lg:block bg-red-700 hover:bg-red-800 text-white py-2 px-4 rounded transition"
+			class="bg-red-700 hover:bg-red-800 text-white py-2 px-4 rounded transition hidden md:block"
 		>
-			<a href="{base}/contato"> Peça um orçamento </a>
+			<a href={links[links.length - 1].href}>{links[links.length - 1].text}</a>
 		</button>
 	</div>
 
@@ -93,19 +79,9 @@
 				&times;
 			</button>
 			<ul class="space-y-6">
-				<li><a href="{base}/" class="text-white text-3xl" on:click={closeMenu}>Home</a></li>
-				<li>
-					<a href="{base}/sobre" class="text-white text-3xl" on:click={closeMenu}>Sobre nós</a>
-				</li>
-				<li>
-					<a href="{base}/clients" class="text-white text-3xl" on:click={closeMenu}>Clientes</a>
-				</li>
-				<li>
-					<a href="{base}/contato" class="text-white text-3xl" on:click={closeMenu}>Contato</a>
-				</li>
-				<li>
-					<a href="{base}/seguranca" class="text-white text-3xl" on:click={closeMenu}>Segurança</a>
-				</li>
+				{#each links as { href, text }}
+					<li><a {href} class="text-white text-3xl" on:click={closeMenu}>{text}</a></li>
+				{/each}
 			</ul>
 		</div>
 	{/if}
